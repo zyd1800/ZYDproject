@@ -1,0 +1,36 @@
+# 依赖包
+node_modules/
+
+# 构建产物
+dist/
+build/
+
+# 环境变量
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 编辑器文件
+.vscode/
+.idea/
+
+# 操作系统文件
+Thumbs.db
+.DS_Store
+
+# 日志文件
+*.log
+
+# 缓存文件
+.cache/
+.temp/
+
+# 测试覆盖率
+coverage/
+
+# 打包文件
+*.zip
+*.tar.gz
+*.tar.bz2

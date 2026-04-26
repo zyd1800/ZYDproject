@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Grotesk:wght@300;700&family=JetBrains+Mono:wght@500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Space Grotesk", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-black font-sans antialiased;
+  }
+}
+
+/* Neobrutalism Utilities */
+@utility brutalist-border {
+  border-width: 4px;
+  border-color: black;
+}
+
+@utility brutalist-shadow {
+  box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+}
+
+@utility brutalist-shadow-lg {
+  box-shadow: 12px 12px 0px 0px rgba(0,0,0,1);
+}
+
+@utility brutalist-shadow-sm {
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+}
+
+@utility brutalist-button {
+  @apply brutalist-border bg-black text-white font-bold py-3 px-6 brutalist-shadow-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-x-[4px] active:translate-y-[4px];
+}
+
+@utility brutalist-card {
+  @apply brutalist-border p-6 bg-white brutalist-shadow;
+}
