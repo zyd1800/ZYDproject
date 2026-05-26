@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValueEvent } from 'motion/react';
 import { 
   Github, 
   Twitter, 
@@ -13,7 +13,15 @@ import {
   Plus,
   X,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Sparkles,
+  Zap,
+  Globe,
+  Smartphone,
+  Palette,
+  Code2,
+  ArrowRight,
+  Star
 } from 'lucide-react';
 
 // --- Types ---
@@ -89,42 +97,119 @@ const initialData: SiteData = {
 
 const initialProjects: Project[] = [
   {
-    id: "1",
-    title: "赛博朋克电商",
-    description: "现代时尚零售的野兽派尝试。由于极具创新力的设计，转化率提升了 40%。",
-    longDescription: "这是一个完整的端到端电商解决方案，采用了大胆的视觉风格。主要功能包括实时库存同步、无缝结算和沉浸式产品展示。通过使用最新的渲染技术，我们在保证高性能的同时实现了极为复杂的视觉效果。",
-    tags: ["WEB DESIGN", "2023"],
-    year: "2023",
-    image: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?q=80&w=1000&auto=format&fit=crop",
+    id: "7",
+    title: "植愈领养",
+    description: "微信小程序植物领养养成平台。签到浇水做任务赚积分，兑换植物写生长日记，治愈系云端养成体验。",
+    longDescription: "都市青年生活节奏快、情感压力大，亟需一种低门槛的绿色情感寄托方式。市面现有养成类产品激励体系薄弱、社交互动缺失，用户粘性不足。\n\n从0到1独立设计并交付一款基于微信生态的绿植领养养成平台，通过系统化日常任务与积分机制，构建完整的「云端养植物」产品闭环。\n\n独立完成需求分析、信息架构与交互设计，基于微信云开发构建后端基础设施，设计19个页面与33个云函数。核心功能模块包括：基于植物生长阶段的动态任务生成引擎、养护记录驱动的积分计算体系、图片云存储与临时URL转换机制。UI采用绿色治愈系卡片式布局，以植物主题图标与暖色点缀营造情感化体验。\n\n项目通过微信审核正式上线，实现从注册、领养、养护日记、积分兑换到社交分享的完整业务闭环，全流程用户转化链路跑通，展示了微信生态小程序全栈产品交付能力与独立项目管理能力。",
+    tags: ["MINI PROGRAM", "2026"],
+    year: "2026",
+    image: "/images/034.jpg",
     color: "bg-white",
     gallery: [
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000",
-      "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=1000",
-      "https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=1000"
+      "/images/029.png",
+      "/images/030.png",
+      "/images/031.png",
+      "/images/032.png",
+      "/images/033.png"
     ],
-    copyText: ""
+    copyText: "小程序名：植愈养成"
+  },
+  {
+    id: "1",
+    title: "十二星座网页",
+    description: "基于 WebGL 着色器的沉浸式星座交互体验，融合 AI 配音的古希腊语音频播放器。",
+    longDescription: "星座文化在年轻用户中拥有庞大受众，但现有星座科普产品多停留在图文罗列阶段，缺乏沉浸式视觉交互和具有文化厚度的内容体系，难以满足用户对「质感体验」的需求。\n\n以古希腊美学为设计基底，构建一个融合WebGL 3D视觉、AI语音合成与结构化知识体系的沉浸式星座文化科普网页，打造差异化的文化消费体验。\n\n借助Gemini与Playwright完成竞品设计逆向分析与字体风格匹配的调研闭环；运用Claude code交付GLSL自定义Fragment Shader聚光灯衰减算法与8路Canvas条件渲染的性能优化方案；集成gTTS AI语音引擎为12星座希腊语名称生成高保真音频；设计12星座神话故事、四大元素体系、Zodiac FAQ手风琴组件等完整内容架构，实现AI驱动的全链路内容生产与交付。\n\n上线了具备光影鼠标互动、卡牌发掘动效与AI音频播放的沉浸式科普网页，通过GitHub开源与Netlify全球部署上线，形成了可复用的AI驱动文化交流产品的设计方法论。",
+    tags: ["WEB DESIGN", "2026"],
+    year: "2026",
+    image: "/images/043.jpg",
+    color: "bg-[#0755bb]",
+    gallery: [
+      "/images/035.png",
+      "/images/036.png",
+      "/images/037.png",
+      "/images/038.png",
+      "/images/039.png",
+      "/images/040.png",
+      "/images/041.png",
+      "/images/042.png"
+    ],
+    copyText: "https://the-twelve.netlify.app"
   },
   {
     id: "2",
-    title: "霓虹之夜视觉标识",
-    description: "地下音乐社群的视觉形象设计。粗线条，高对比度，追求极致影响力。",
-    longDescription: "为地下电子音乐社群设计的一整套视觉系统。包括品牌 Logo、海报生成系统以及一套响应式的网站设计。设计语言灵感来源于 80 年代的赛博朋克 and 90 年代的平面设计革命。",
-    tags: ["BRANDING", "2024"],
-    year: "2024",
-    image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop",
+    title: "猫猫网页",
+    description: "基于滚动驱动的个人介绍网页。一段关于小猫Martin的沉浸式讲故事体验，滚动即播放。",
+    longDescription: "个人品牌展示面临同质化困境——传统静态简历页打开3秒即被关闭，用户在信息冗余中缺乏记忆锚点。如何在有限注意力窗口内建立深刻的情感连接，是个人品牌设计的核心命题。\n\n以「小猫Martin」为主角，打造一款滚动驱动的沉浸式叙事网页，通过动态视频与文字交错的互动体验，让用户在「看故事」的过程中自然完成对个人品牌的价值认知。\n\n采用纯HTML+CSS+JS构建滚动叙事（Scrollytelling）架构，通过Seedance 2.0生成6段小猫动态视频素材；借助Claude code实现视频进度与滚动深度的实时同步引擎，以playbackRate逐帧驱动替代传统seek方案，彻底消除卡顿问题；引入缓动平滑算法适配间断性滚动习惯；UI融入Apple风格动效语言——弹簧入场曲线、子元素逐级延迟亮相、高亮词发光脉冲；中英文双语文本以左右交错浮动布局覆盖于视频之上。\n\n通过Netlify全球CDN部署上线，实现了「滚到哪看到哪」的无缝叙事体验，用户平均停留时长与页面回访率显著优于传统静态介绍页，成功打造了兼具情感温度与艺术审美的个人品牌入口。",
+    tags: ["WEB DESIGN", "2026"],
+    year: "2026",
+    image: "/images/023.jpg",
     color: "bg-[#00F0FF]",
     gallery: [
-      "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1000",
-      "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1000",
-      "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=1000"
+      "/images/024.png",
+      "/images/025.png",
+      "/images/026.png",
+      "/images/027.png",
+      "/images/028.png"
     ],
-    copyText: ""
+    copyText: "https://catmartinweb.netlify.app/"
+  },
+  {
+    id: "4",
+    title: "电商平台运营",
+    description: "独立电商操盘的自动化探索。搭建AI专属工作流，单人运营效能获得极大释放",
+    longDescription: "在校期间面临「学业与创业并行」的时间资源冲突：传统电商运营高度依赖人工，选品分析、客服应答、营销提效均需大量精力投入，单人操盘的天花板极低。\n\n在保持学业的前提下，从0到1独立操盘一家拼多多汽车配件店铺，探索AI技术在真实电商场景中的降本增效路径，验证「AI赋能单人商业闭环」的可行性。\n\n产品策略层：借助大模型进行竞品语义分析与标题精准优化，利用AIGC工具批量生成并A/B测试高转化主图。运营效率层：搭建AI自动化工作流高效处理库存同步与客情问询，释放重复性人工操作。增长层：通过数据驱动迭代营销策略，在2025年3月实施精准投放组合拳。\n\n累计处理订单670+笔，总营收突破3.5万元，单月峰值营收达6529元（2025年3月）。完整跑通了从选品→营销→履约→售后的0到1商业闭环，用真实数据验证了AI技术在单人电商操盘场景中的ROI价值。",
+    tags: ["OPERATION", "2024"],
+    year: "2024",
+    image: "/images/021.jpg",
+    color: "bg-white",
+    gallery: [
+      "/images/2024.jpg",
+      "/images/2025.jpg",
+      "/images/2026.jpg"
+    ],
+    copyText: "拼多多店铺名：凯凯的汽车配件店"
+  },
+  {
+    id: "5",
+    title: "校园新闻网站",
+    description: "一个第一时间了解或发布校园新闻的社区，（初次尝试vibe coding，里程碑似的意义）",
+    longDescription: "校园新闻资讯高度碎片化——多源信息分散在不同渠道，缺乏统一入口。同时，内容安全管控依赖人工审核，效率低且漏检率高，个性化推荐能力缺失导致信息过载。\n\n首次采用Vibe Coding（自然语言驱动编程）开发模式，借助AI工具全链路驱动，构建一个集智能聚合、个性化推荐与实时内容安全于一体的校园新闻管理平台，验证「AI辅助软件工程」在真实产品交付中的可行性。\n\n以Gemini担任「产品架构师」角色，负责系统需求分析、用户角色规划与精准提示词生成；以Trae作为「核心开发执行者」完成前后端代码编程与自动化测试。基于Spring Boot + Vue 3构建前后端分离架构；核心功能实现：Jaccard相似度个性化新闻推荐算法、DFA树敏感词实时拦截机制、JWT + Spring Security多角色权限管控体系。\n\n成功交付一个智能、安全、高效的校园资讯聚合平台。这次跨界开发实践深刻验证了自然语言驱动编程（Vibe Coding）在软件工程全生命周期中的可行性与效率优势，为AI产品管理者的技术视野与工程协作方法论拓展了核心认知边界。", 
+    tags: ["WEB DESIGN", "2025"],
+    year: "2025",
+    image: "/images/010.png",
+    color: "bg-white",
+    gallery: [
+      "/images/011.png",
+      "/images/012.png",
+      "/images/013.png",
+      "/images/014.png",
+      "/images/015.png",
+      "/images/016.png",
+      "/images/017.png"
+    ],
+    copyText: "demo版本，未上线"
+  },
+  {
+    id: "6",
+    title: "公司抽奖网站",
+    description: "以 AI 美学雕琢年会仪式感，用极简网页定格每一份幸运高光",
+    longDescription: "企业年会抽奖环节长期依赖传统手动方式——主持人念名字、纸箱抽签，效率低下且缺乏仪式感，无法匹配现代企业「科技+人文」的年会品质诉求，尤其在混合办公场景下线下/线上协同体验割裂。\n\n基于AI工具全链路驱动，在极短周期内快速交付一款兼具品牌仪式感与实用功能的企业年会抽奖网页工具，满足大屏投影与移动端双场景使用需求，零运维门槛。\n\n借助Gemini完成红金视觉风格的艺术方向设定与交互原型设计，支持企业Logo上传、自定义背景与响应式双端布局；通过Codex驱动核心功能开发——名单批量导入、不可重复随机抽奖算法、中奖名单一键导出。强化产品可靠性：防重复中奖校验机制、输入数据格式校验、本地存储兜底与礼花动态特效的情绪峰值设计。\n\n通过Netlify一键部署上线，生成零运维的线上访问链接，完美适配大屏投影与个人操作端，单次年会使用覆盖全公司员工。充分验证了AI驱动「轻量级企业工具」在短周期内高质量交付的能力，为AI产品管理的敏捷交付策略提供了成功案例。", 
+    tags: ["WEB DESIGN", "2026"],
+    year: "2026",
+    image: "/images/022.png",
+    color: "bg-[#EFFF00]",
+    gallery: [
+      "/images/018.png",
+      "/images/019.png",
+      "/images/020.png"
+    ],
+    copyText: "https://lotterydraw1800.netlify.app/"
   },
   {
     id: "3",
     title: "文案提取工作流",
     description: "通过COZE智能体搭建了一个仅通过抖音的分享链接就能提取该视频文案并加工的工具。来自信息与效率之间的碰撞。",
-    longDescription: "这是基于 Coze 平台搭建的「视频文案一键处理助手」智能体。专为短视频创作者打造的一站式文案处理工具。智能体通过严格的规则化提示词设定，明确首次打招呼话术、分级优先级的核心执行规则，精准区分抖音链接、非抖音链接、润色 / 思维导图指令的不同响应逻辑，严控仅输出纯净文本，杜绝冗余字段与无关内容。其内置 3 个专属工作流：一是 video 提取文案工作流，通过链接提取、抖音链接解析、字幕生成三大节点，精准提取纯文案内容；二是 xigao 洗稿润色工作流，通过豆包大模型节点完成文案优化改写；三是 key 关键词 & 思维导图工作流，双大模型节点分别完成核心关键词提取、结构化思维导图生成。用户输入抖音视频链接即可自动提取文案，发送对应指令即可触发后续操作，全流程自动化，大幅提升短视频二次创作效率。",
+    longDescription: "短视频创作者面临「灵感充沛、执行阻塞」的效率困境——手动提取竞品视频文案、洗稿改写、梳理关键词与思维导图，每一步都需要在多个工具间反复切换，单个视频的文案加工耗时可达30分钟以上，严重拖累内容产出节奏。\n\n基于Coze智能体平台，设计并交付一个「分享链接即出结果」的一站式视频文案自动化处理工具，让创作者将精力从机械操作中解放出来，聚焦创意本身。\n\n产品设计层：构建严格的规则化提示词体系，预设分级优先级的核心执行规则，精准区分抖音链接解析、非抖音链接处理、润色指令与思维导图指令的不同响应逻辑，严控纯净文本输出，杜绝冗余字段。工作流架构层：设计3个专属自动化管道——① video工作流（链接提取→抖音解析→字幕生成），② xigao工作流（豆包大模型文案优化改写），③ key工作流（双大模型节点并行：核心关键词提取 + 结构化Markdown思维导图生成）。\n\n用户仅需发送抖音分享链接即可自动完成文案提取→智能润色→思维导图生成的全流程，单次处理时间由30分钟压缩至秒级。已部署为可复用的Coze智能体（bot_id：7630372911542927366），展示了AI智能体在垂域效率工具中的产品化落地能力与用户痛点洞察深度。",
     tags: ["AI workflow", "2025"],
     year: "2025",
     image: "/images/001.png",
@@ -136,50 +221,6 @@ const initialProjects: Project[] = [
       '/images/005.png'
     ],
     copyText: "该Coze智能体的bot_id：7630372911542927366"
-  },
-  {
-    id: "4",
-    title: "电商平台运营",
-    description: "独立电商操盘的自动化探索。搭建AI专属工作流，单人运营效能获得极大释放",
-    longDescription: "在近两年的时间里，我从0到1独立操盘了一家拼多多汽车配件店铺，全权负责了从选品策划、营销推广到订单履约及售后客服的全流程运营。这个项目最大的亮点，是我将AI技术深度融入了真实的商业实战中。我借助大模型进行竞品与语义分析来精准优化标题，并利用AIGC工具批量生成、测试高转化主图，有效提升了店铺的自然搜索流量。同时，为了在运营期间兼顾日常学业，我主动搭建了AI自动化工作流，用来高效处理库存与客情等突发问题，这大幅提升了我的个人效能。最终，这家店铺累计处理了670余笔订单，总营收突破了3.5万元，其中在2025年3月，我通过精准营销创下了6529元的单月营收峰值。这段经历不仅让我完整跑通了0到1的商业闭环，更让我切实锻炼了将前沿AI技术转化为实际生产力的落地实操能力。",
-    tags: ["OPERATION", "2024"],
-    year: "2024",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000",
-    color: "bg-white",
-    gallery: [
-      "/images/2024.jpg",
-      "/images/2025.jpg",
-      "/images/2026.jpg"
-    ],
-    copyText: "拼多多店铺名：凯凯的汽车配件店"
-  },
-  {
-    id: "5",
-    title: "AI 智能体工作流",
-    description: "基于 Coze 平台搭建的智能体工作流，实现自动化文案处理",
-    longDescription: "这是一个基于 Coze 平台的智能体工作流项目，主要用于处理短视频文案。通过搭建多个工作流节点，实现了从链接提取、文案生成到思维导图创建的全流程自动化。",
-    tags: ["AI", "2025"],
-    year: "2025",
-    image: "/images/010.png",
-    color: "bg-white",
-    gallery: [
-      "/images/010.png"
-    ],
-    copyText: "智能体工作流项目"
-  },
-  {
-    id: "6",
-    title: "创意设计作品",
-    description: "展示创意设计能力的作品集项目",
-    longDescription: "这是一个展示个人创意设计能力的项目，包含了多个设计作品和创意概念。通过不同的设计风格和表现手法，展现了创意设计的多样性。",
-    tags: ["DESIGN", "2025"],
-    year: "2025",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000",
-    color: "bg-[#EFFF00]",
-    gallery: [
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000"
-    ],
-    copyText: "创意设计作品集"
   }
 ];
 
@@ -573,6 +614,251 @@ const CopyTextModal = ({ isOpen, onClose, text }: {
   );
 };
 
+// ====== HOMEPAGE EXTENSIONS ======
+
+const MarqueeTicker = () => {
+  const items = ["VIBE CODER", "WEBGL SHADER", "AI WORKFLOW", "FULL-STACK", "CREATIVE DEV", "MINI PROGRAM", "NEO-BRUTALISM", "REACT", "THREE.JS", "COZE BOT", "TYPESCRIPT", "TAILWIND"];
+  return (
+    <div className="border-t-4 border-b-4 border-black bg-black overflow-hidden py-6">
+      <motion.div className="flex gap-12 whitespace-nowrap"
+        animate={{ x: ["0%", "-50%"] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}>
+        {[...items, ...items].map((item, i) => (
+          <span key={i} className="text-white font-display font-black text-2xl md:text-4xl uppercase tracking-tighter italic">
+            {item}<span className="text-[#8FFF00] mx-6">•</span>
+          </span>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
+const StatsCounter = () => {
+  const stats = [
+    { value: 7, suffix: "+", label: "Projects Shipped", icon: <Code2 className="w-8 h-8" />, color: "bg-[#8FFF00]" },
+    { value: 3, suffix: ".5w", label: "Revenue Generated", icon: <Zap className="w-8 h-8" />, color: "bg-[#00F0FF]" },
+    { value: 670, suffix: "+", label: "Orders Fulfilled", icon: <Globe className="w-8 h-8" />, color: "bg-[#FF3D00]" },
+    { value: 12, suffix: "", label: "Zodiac Signs", icon: <Star className="w-8 h-8" />, color: "bg-[#EFFF00]" },
+  ];
+
+  const StatCard = ({ stat, index }: any) => {
+    const [count, setCount] = useState(0);
+    const ref = useRef<HTMLDivElement>(null);
+    const [inView, setInView] = useState(false);
+    useEffect(() => {
+      const el = ref.current; if (!el) return;
+      const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setInView(true); }, { threshold: 0.5 });
+      obs.observe(el); return () => obs.disconnect();
+    }, []);
+    useEffect(() => {
+      if (!inView) return;
+      const steps = 40; let cur = 0;
+      const t = setInterval(() => { cur += stat.value / steps; if (cur >= stat.value) { setCount(stat.value); clearInterval(t); } else setCount(Math.floor(cur)); }, 1200 / steps);
+      return () => clearInterval(t);
+    }, [inView, stat.value]);
+    return (
+      <motion.div ref={ref} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 * index }}
+        className={`${stat.color} brutalist-border brutalist-shadow p-8 flex flex-col items-center text-center group hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all`}>
+        <div className="mb-4 opacity-60 group-hover:opacity-100 transition-opacity">{stat.icon}</div>
+        <div className="text-6xl md:text-8xl font-display font-black tracking-tighter">{count}{stat.suffix}</div>
+        <div className="mt-3 font-mono text-sm font-bold uppercase tracking-widest">{stat.label}</div>
+      </motion.div>
+    );
+  };
+  return (
+    <div className="border-b-4 border-black bg-white p-6 md:p-24">
+      <div className="text-center mb-16">
+        <h2 className="text-5xl md:text-7xl font-display font-black uppercase italic tracking-tighter leading-none">The Numbers<br/>Don't Lie.</h2>
+        <div className="mt-4 font-mono text-sm uppercase tracking-widest text-gray-500">REAL RESULTS. REAL IMPACT.</div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {stats.map((s, i) => <StatCard key={i} stat={s} index={i} />)}
+      </div>
+    </div>
+  );
+};
+
+const ScrollDrivenCards = ({ projects }: { projects: Project[] }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
+  const featuredIds = ["7", "1", "2", "6"];
+  const featured = projects.filter(p => featuredIds.includes(p.id));
+  featured.sort((a, b) => featuredIds.indexOf(a.id) - featuredIds.indexOf(b.id));
+
+  const quotes: Record<string, string[]> = {
+    "7": ["从种子到灵魂 — 19个页面构建治愈体验", "云端养护引擎 — 33个云函数精准调度", "绿色疗愈设计 — 像素级卡片美学打磨", "微信生态全栈 — 审核上线完整交付"],
+    "1": ["着色器之光 — GLSL 诗意雕刻金属质感", "十二星辰之声 — AI合成古希腊语音呢喃", "星穹卡牌 — 滚动触发发掘揭示动效", "神话体系深度 — 四大元素十二灵魂"],
+    "2": ["滚动即播放 — 小猫马丁与你共舞叙事", "Seedance 梦境 — 六段AI生成动态影像", "逐帧魔法 — 零卡顿纯丝滑播放体验", "双语灵魂 — 中英文文字穿梭交错画面"],
+    "6": ["红金美学 — AI 设计的年会视觉系统", "一键部署 — Netlify 零运维即开即用", "防重复校验 — 抽奖公平性万无一失", "大屏适配 — 投影端与 PC 端完美呈现"],
+  };
+  const quoteColors = ["bg-[#8FFF00]", "bg-[#00F0FF]", "bg-[#EFFF00]", "bg-[#FF3D00]"];
+
+  // Unequal distribution: last card gets 1.4x space
+  const weights = [1, 1, 1, 1.4];
+  const totalWeight = weights.reduce((s, w) => s + w, 0);
+  const breakpoints: number[] = [];
+  let acc = 0;
+  weights.forEach(w => { breakpoints.push(acc); acc += w / totalWeight; });
+  breakpoints.push(1);
+
+  return (
+    <div ref={containerRef} style={{ height: `${featured.length * 120}vh` }} className="relative bg-black border-b-4 border-black">
+      {featured.map((project, i) => {
+        const start = breakpoints[i];
+        const end = breakpoints[i + 1];
+        const mid = (start + end) / 2;
+        const range = end - start; // how wide this scene's scroll zone is
+
+        const fadeIn = useTransform(scrollYProgress, [start + range * 0.15, start + range * 0.35], [0, 1]);
+        const fadeOut = useTransform(scrollYProgress, [end - range * 0.15, end], [1, 0]);
+        const showQuotes = useTransform(scrollYProgress, [start + range * 0.1, start + range * 0.35, end - range * 0.1, end], [0, 1, 1, 0]);
+        const [quotesOn, setQuotesOn] = useState(false);
+        useMotionValueEvent(showQuotes, "change", (v: number) => {
+          const next = v > 0.3;
+          if (next !== quotesOn) setQuotesOn(next);
+        });
+
+        const cardScale = useTransform(scrollYProgress, [start, mid, end], [0.88, 1, 0.88]);
+        const cardY = useTransform(scrollYProgress, [start, mid, end], [60, 0, -60]);
+
+        const projectQuotes = quotes[project.id] || quotes["7"];
+
+        return (
+          <div key={project.id} className="h-screen sticky top-0 flex items-center overflow-hidden">
+            <div className="absolute inset-0 opacity-[0.06] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]" />
+
+            <div className="w-full max-w-[1400px] mx-auto px-4 md:px-12 flex flex-col gap-4 md:grid md:grid-cols-[1.1fr_1fr] md:gap-12 md:items-center h-full justify-center">
+              {/* Card (desktop: left, mobile: top) */}
+              <motion.div style={{ scale: cardScale, y: cardY }}
+                className="brutalist-border brutalist-shadow-lg bg-white overflow-hidden w-full max-w-[680px] aspect-[4/3] relative group mx-auto md:mx-0">
+                <div className={`h-3 md:h-4 ${project.color}`} />
+                <div className="relative h-[62%] overflow-hidden">
+                  <img referrerPolicy="no-referrer" src={project.image} alt={project.title}
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:rotate-[0.5deg]" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
+                </div>
+                <div className="p-3 md:p-6 flex items-center justify-between">
+                  <div>
+                    <div className="flex gap-2 mb-2">
+                      {project.tags.map(t => (<span key={t} className="brutalist-border bg-black text-white px-2 py-0.5 text-[10px] font-black uppercase tracking-tighter">{t}</span>))}
+                    </div>
+                    <h3 className="text-lg md:text-4xl font-display font-black uppercase tracking-tighter">{project.title}</h3>
+                    <p className="text-xs md:text-sm font-bold text-gray-500 mt-1 uppercase tracking-wide line-clamp-1 md:line-clamp-none">{project.description}</p>
+                  </div>
+                  <motion.div animate={{ x: [0, 8, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>
+                    <ArrowRight className="w-5 h-5 md:w-8 md:h-8" />
+                  </motion.div>
+                </div>
+                <motion.div className="absolute inset-0 bg-[#8FFF00] mix-blend-difference pointer-events-none"
+                  initial={{ x: "-100%" }} whileHover={{ x: "100%" }} transition={{ duration: 0.35 }} />
+              </motion.div>
+
+              {/* Desktop Quotes (right, vertical) */}
+              <div className="hidden md:flex flex-col gap-4">
+                <AnimatePresence mode="wait">
+                  {quotesOn && (
+                    <motion.div key={`${project.id}-quotes`} className="flex flex-col gap-4"
+                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}>
+                      {projectQuotes.map((quote, qi) => (
+                        <motion.div key={qi}
+                          initial={{ opacity: 0, x: 80 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -40 }}
+                          transition={{ duration: 0.5, delay: 0.1 * qi, ease: "easeOut" }}
+                          className="group">
+                          <div className={`${quoteColors[qi]} text-black px-5 py-4 brutalist-border brutalist-shadow-sm transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-2px] hover:brutalist-shadow cursor-default`}>
+                            <div className="flex items-start gap-3">
+                              <span className="font-display font-black text-3xl md:text-4xl leading-none opacity-30 group-hover:opacity-60 transition-opacity">
+                                {String(qi + 1).padStart(2, '0')}
+                              </span>
+                              <div>
+                                <p className="font-display font-black text-sm md:text-base uppercase tracking-tighter leading-tight">
+                                  {quote}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Mobile Quotes (below card, horizontal grid) */}
+              <div className="flex md:hidden flex-wrap gap-2 justify-center">
+                <AnimatePresence mode="wait">
+                  {quotesOn && (
+                    <motion.div key={`${project.id}-quotes-mobile`} className="grid grid-cols-2 gap-2"
+                      initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}>
+                      {projectQuotes.map((quote, qi) => (
+                        <motion.div key={qi}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3, delay: 0.08 * qi }}>
+                          <div className={`${quoteColors[qi]} text-black px-3 py-2 brutalist-border brutalist-shadow-sm`}>
+                            <span className="font-mono text-[10px] font-black opacity-40 mr-1">{String(qi + 1).padStart(2, '0')}</span>
+                            <span className="font-display font-black text-[11px] uppercase tracking-tighter leading-tight">{quote}</span>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Scroll indicator */}
+            <motion.div style={{ opacity: useTransform(scrollYProgress, [start + range * 0.02, start + range * 0.1], [1, 0]) }}
+              className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-gray-500">Scroll</span>
+              <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+                <ChevronDown className="w-4 h-4 text-gray-500" />
+              </motion.div>
+            </motion.div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const CTASection = ({ onExplore, onContact }: { onExplore: () => void; onContact: () => void }) => (
+  <div className="border-b-4 border-black bg-[#FF3D00] p-6 md:p-24 text-center relative overflow-hidden">
+    <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 bg-[radial-gradient(#fff_2px,transparent_2px)] [background-size:30px_30px]" />
+    </div>
+    <div className="relative z-10">
+      <motion.div initial={{ rotate: -3, scale: 0.9, opacity: 0 }} whileInView={{ rotate: 0, scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 100, damping: 15 }}>
+        <h2 className="text-5xl md:text-8xl font-display font-black italic uppercase tracking-tighter leading-none text-white mb-8">DARE TO<br/>BUILD THE<br/>IMPOSSIBLE?</h2>
+      </motion.div>
+      <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
+        className="text-xl md:text-2xl font-bold text-white/90 max-w-2xl mx-auto mb-12 font-mono uppercase">
+        Every great product starts with a single commit.
+      </motion.p>
+      <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.5 }}
+        className="flex flex-col sm:flex-row gap-4 justify-center">
+        <motion.button onClick={onExplore} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+          className="bg-white text-[#FF3D00] px-12 py-6 brutalist-border brutalist-shadow font-black text-2xl uppercase italic hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center gap-3">
+          <Sparkles className="w-6 h-6" /> Explore Work
+        </motion.button>
+        <motion.button onClick={onContact} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+          className="bg-transparent border-4 border-white text-white px-12 py-6 font-black text-2xl uppercase italic hover:bg-white hover:text-[#FF3D00] transition-all flex items-center justify-center gap-3">
+          <Mail className="w-6 h-6" /> Get In Touch
+        </motion.button>
+      </motion.div>
+      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.8 }}
+        className="mt-16 flex justify-center gap-6">
+        {[Github, Twitter, Linkedin].map((Icon, i) => (
+          <a key={i} href="#" className="text-white/60 hover:text-white transition-colors"><Icon className="w-6 h-6" /></a>
+        ))}
+      </motion.div>
+    </div>
+  </div>
+);
+
 export default function App() {
   const [data, setData] = useState<SiteData>(initialData);
   const [projects, setProjects] = useState<Project[]>(initialProjects);
@@ -587,113 +873,22 @@ export default function App() {
   // Copy Text State
   const [copyModalOpen, setCopyModalOpen] = useState(false);
   const [activeCopyText, setActiveCopyText] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Load from local storage on mount
   useEffect(() => {
     try {
-      const savedDataRaw = localStorage.getItem('site_data');
-      const savedProjectsRaw = localStorage.getItem('projects_data');
+      // Clear localStorage to ensure we always use the latest code data
+      localStorage.removeItem('projects_data');
+      localStorage.removeItem('site_data');
       
-      if (savedDataRaw) {
-        let parsed = JSON.parse(savedDataRaw);
-        
-        // Force update for the Anime section if it's the old one
-        // and ensure the data structure matches initialData for deep merging
-        if (parsed.about?.funFacts) {
-          parsed.about.funFacts = parsed.about.funFacts.map((f: any) => {
-            if (f.fact === "合成器爱好者") return initialData.about.funFacts[2];
-            if (f.fact === "数字游民" || f.detail.includes("天生的社交达人")) return initialData.about.funFacts[3];
-            // Migration for the orange color
-            if (f.color === "bg-[#FF3D00]") f.color = "bg-[#FF0055]";
-            return f;
-          });
-        }
-
-        if (parsed.about?.timeline) {
-          parsed.about.timeline = parsed.about.timeline.map((t: any) => {
-            if (t.color === "bg-[#FF3D00]") t.color = "bg-[#FF0055]";
-            return t;
-          });
-        }
-
-        // Force update avatar if it was the old placeholder or a previous artifact link
-        const oldPlaceholder = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop";
-        if (parsed.hero && (parsed.hero.avatar === oldPlaceholder || !parsed.hero.avatar || parsed.hero.avatar.includes("artifact.ais-static.com"))) {
-          parsed.hero.avatar = initialData.hero.avatar;
-        }
-
-        // Deep merge with initialData to ensure new fields (timeline, funFacts) exist
-        setData({
-          ...initialData,
-          hero: { ...initialData.hero, ...parsed.hero },
-          about: { 
-            ...initialData.about, 
-            ...parsed.about,
-            skills: initialData.about.skills, // Force to 100%
-            timeline: initialData.about.timeline, // Force update for the new content
-            funFacts: parsed.about?.funFacts || initialData.about.funFacts
-          },
-          footer: { ...initialData.footer, ...parsed.footer }
-        });
-      }
+      // Always use the latest initial data from code
+      setData(initialData);
+      setProjects(initialProjects);
       
-      if (savedProjectsRaw) {
-        let parsedProjects = JSON.parse(savedProjectsRaw);
-        let dataChanged = false;
-
-        const migratedProjects = parsedProjects.map((p: any) => {
-          const initial = initialProjects.find(ip => ip.id === p.id);
-          if (!initial) return p;
-
-          let updated = { ...p };
-          let changed = false;
-
-          // General migration for DEVELOPMENT -> OPERATION tags
-          if (updated.tags.includes("DEVELOPMENT")) {
-            updated.tags = updated.tags.map((t: string) => t === "DEVELOPMENT" ? "OPERATION" : t);
-            changed = true;
-          }
-
-          // Specific migrations per ID to ensure new content is applied
-          if (p.id === "3") {
-            const needsUpdate = !updated.copyText || updated.copyText === "" || !updated.gallery || updated.gallery.length === 0;
-            if (needsUpdate) {
-              updated.gallery = initial.gallery;
-              updated.copyText = initial.copyText;
-              changed = true;
-            }
-          }
-
-          if (p.id === "4") {
-            const hasNewGallery = updated.gallery?.some((img: string) => img.includes("2024.jpg"));
-            if (!hasNewGallery) {
-              updated.gallery = initial.gallery;
-              updated.copyText = initial.copyText;
-              updated.description = initial.description;
-              updated.longDescription = initial.longDescription;
-              changed = true;
-            }
-          }
-
-          // Catch-all for missing galleries or copyText
-          if (!updated.gallery || updated.gallery.length === 0) {
-            updated.gallery = initial.gallery;
-            changed = true;
-          }
-          if (updated.copyText === undefined) {
-            updated.copyText = initial.copyText || "";
-            changed = true;
-          }
-
-          if (changed) dataChanged = true;
-          return updated;
-        });
-
-        setProjects(migratedProjects);
-        if (dataChanged) {
-          localStorage.setItem('projects_data', JSON.stringify(migratedProjects));
-        }
-      }
+      // Save to localStorage for future use
+      localStorage.setItem('site_data', JSON.stringify(initialData));
+      localStorage.setItem('projects_data', JSON.stringify(initialProjects));
     } catch (e) {
       console.error("Failed to load data from storage", e);
     }
@@ -735,7 +930,7 @@ export default function App() {
       {/* --- Navigation --- */}
       <nav className="sticky top-0 z-40 bg-white border-b-4 border-black">
         <div className="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="bg-[#FF3D00] brutalist-border brutalist-shadow-sm px-4 py-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all cursor-pointer">
+          <div className="bg-[#FF3D00] brutalist-border brutalist-shadow-sm px-4 py-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all cursor-pointer" onClick={() => setActiveTab('home')}>
             <span className="text-2xl font-display font-black text-white italic tracking-tighter">创意作品.VC</span>
           </div>
           
@@ -752,9 +947,30 @@ export default function App() {
           </div>
           
           <div className="md:hidden text-black">
-            <button className="brutalist-border p-2 bg-yellow-400 font-bold">
-               菜单
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+              className="brutalist-border p-2 bg-yellow-400 font-bold flex items-center gap-1">
+              <span className="text-sm">{mobileMenuOpen ? '✕' : '☰'}</span>
+              <span>菜单</span>
             </button>
+            <AnimatePresence>
+              {mobileMenuOpen && (
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-20 left-0 right-0 bg-white border-b-4 border-black z-50">
+                  {navItems.map(item => (
+                    <button
+                      key={item.id}
+                      onClick={() => { setActiveTab(item.id); setMobileMenuOpen(false); }}
+                      className={`w-full text-left px-6 py-4 font-black uppercase tracking-tighter border-b-2 border-black last:border-b-0 hover:bg-yellow-400 transition-colors ${activeTab === item.id ? 'bg-yellow-400' : ''}`}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </nav>
@@ -764,7 +980,7 @@ export default function App() {
         {/* --- Home Section --- */}
         {activeTab === 'home' && (
           <div className="flex flex-col md:flex-row min-h-[80vh]">
-            <div className="flex-1 bg-[#FFFF00] p-12 flex flex-col justify-center border-b-4 md:border-b-0 md:border-r-4 border-black relative overflow-hidden">
+            <div className="flex-1 bg-[#FFFF00] p-6 md:p-12 flex flex-col justify-center border-b-4 md:border-b-0 md:border-r-4 border-black relative overflow-hidden">
               <div className="relative z-10">
                 <div className="bg-black text-white px-6 py-2 inline-block mb-6 brutalist-shadow-sm font-sans font-black italic uppercase tracking-tighter">
                   <EditableText 
@@ -774,7 +990,7 @@ export default function App() {
                   />
                 </div>
                 
-                <h1 className="text-7xl md:text-9xl font-display font-black leading-none mb-8 tracking-tighter">
+                <h1 className="text-5xl md:text-9xl font-display font-black leading-none mb-8 tracking-tighter">
                   <EditableText 
                     text={data.hero.title} 
                     onSave={(v) => updateField('hero.title', v)} 
@@ -782,7 +998,7 @@ export default function App() {
                   />
                 </h1>
                 
-                <div className="text-xl md:text-2xl font-medium max-w-xl leading-relaxed mb-10">
+                <div className="text-lg md:text-2xl font-medium max-w-xl leading-relaxed mb-10">
                   <EditableText 
                     text={data.hero.description} 
                     onSave={(v) => updateField('hero.description', v)} 
@@ -805,7 +1021,7 @@ export default function App() {
               </div>
             </div>
             
-            <div className="flex-1 bg-[#00F0FF] p-6 flex items-center justify-center relative min-h-[500px]">
+            <div className="flex-1 bg-[#00F0FF] p-6 flex items-center justify-center relative min-h-[300px] md:min-h-[500px]">
               <div className="w-full absolute inset-0 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px]"></div>
               <div className="relative w-full h-full max-w-2xl brutalist-border overflow-hidden bg-gray-200 brutalist-shadow-lg scale-90 md:scale-100 group">
                 {data.hero.avatar ? (
@@ -822,6 +1038,16 @@ export default function App() {
               </div>
             </div>
           </div>
+        )}
+
+        {/* --- Home Extended Sections --- */}
+        {activeTab === 'home' && (
+          <>
+            <MarqueeTicker />
+            <ScrollDrivenCards projects={projects} />
+            <StatsCounter />
+            <CTASection onExplore={() => setActiveTab('portfolio')} onContact={() => setActiveTab('contact')} />
+          </>
         )}
 
         {/* --- About Section --- */}
