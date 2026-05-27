@@ -575,10 +575,10 @@ const ImageGalleryModal = ({ isOpen, onClose, images, currentIndex, onIndexChang
           <div className="relative w-full h-full flex items-center justify-center overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.92 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
               className="flex items-center justify-center"
             >
               <div
