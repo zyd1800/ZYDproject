@@ -575,24 +575,19 @@ const ImageGalleryModal = ({ isOpen, onClose, images, currentIndex, onIndexChang
           <div className="relative w-full h-full flex items-center justify-center overflow-hidden" onClick={(e) => e.stopPropagation()}>
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ 
-                opacity: 1, 
-                scale: 1, 
-                x: swipeOffset 
-              }}
-              exit={{ opacity: 0, scale: 0.92 }}
-              transition={{ 
-                type: 'spring', 
-                stiffness: 300, 
-                damping: 25,
-                x: isSwiping ? { duration: 0 } : { type: 'spring', stiffness: 400, damping: 30 }
-              }}
-              style={{
-                transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)`,
-                cursor: scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
-              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="flex items-center justify-center"
             >
+              <div
+                style={{
+                  transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)`,
+                  cursor: scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
+                  transition: isDragging ? 'none' : 'transform 0.1s ease-out'
+                }}
+              >
               <img 
                 src={images[currentIndex]}
                 className="max-w-full max-h-[80vh] object-contain"
@@ -601,6 +596,7 @@ const ImageGalleryModal = ({ isOpen, onClose, images, currentIndex, onIndexChang
                 draggable={false}
                 decoding="async"
               />
+              </div>
             </motion.div>
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white text-black font-black px-4 py-2 brutalist-border">
               {currentIndex + 1} / {images.length}
