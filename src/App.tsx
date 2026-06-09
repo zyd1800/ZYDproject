@@ -66,7 +66,7 @@ const initialData: SiteData = {
     subtitle: "VIBE CODER // 北京 // EST 2026",
     description: "编写感觉和看起来一样好的代码。野兽派美学遇见整洁架构。在这里，卓越的技术与原始的创意能量完美融合。",
     badge: "查看我的作品",
-    avatar: "/images/avatar.png" // 上传 avatar.png 到 /public/images 后即可显示
+    avatar: "/images/avatar.webp"
   },
   about: {
     content: "我是一名主攻AI方向的计算机应届毕业生，致力于探索人工智能与直觉编程的边界。我热爱 Vibe Coding，享受在心流中将复杂算法转化为优雅且富有灵性的智能应用。",
@@ -221,6 +221,23 @@ const initialProjects: Project[] = [
       '/images/005.webp'
     ],
     copyText: "该Coze智能体的bot_id：7630372911542927366"
+  },
+  {
+    id: "8",
+    title: "AI编导脚本生成器",
+    description: "多平台短视频AI编导工具。选择平台输入产品信息，一键生成抖音/小红书/B站/视频号适配脚本，支持SSE流式输出与历史管理。",
+    longDescription: "短视频创作者在跨平台内容生产中面临「平台差异大、脚本输出慢、适配成本高」的核心痛点——同一产品需要在抖音、小红书、B站、视频号四个差异巨大的内容生态中分别创作，传统人工编导模式下单次多平台脚本产出耗时数小时，严重制约内容产能。\n\n以「产品信息进，多平台脚本出」为核心理念，设计并交付一款面向短视频创作者的全链路AI编导工具，从底层拆解每个平台的内容逻辑与用户心理，实现真正的「一次输入、全平台适配」。\n\n前端基于React + Vite + TailwindCSS + Framer Motion构建，采用Bauhaus野兽派设计语言（红/蓝/黄三原色、零圆角、4px粗黑边框、硬偏移阴影与点阵背景），字体选用Outfit（标题）与JetBrains Mono（标签）。后端基于Node.js原生HTTP模块构建本地DeepSeek API代理转发服务，通过SSE Server-Sent Events实现AI输出实时流式渲染；设计四大平台差异化系统提示词引擎，每平台独立定义Hook风格、口播语速、内容结构与输出规则；基于JSON文件持久化实现50条历史记录管理，支持增删清空。\n\n交付了覆盖「产品信息填报→平台选择→AI流式生成→结果查看→历史管理」全链路的完整产品闭环。单次多平台脚本生成从数小时压缩至秒级，前端骨架屏与流式渲染保障了实时反馈体验。该项目展示了AI Agent在产品化场景中的端到端交付能力，验证了Bauhaus设计语言在工具类产品中的视觉差异化价值。",
+    tags: ["WEB APP", "2026"],
+    year: "2026",
+    image: "/images/048.jpg",
+    color: "bg-white",
+    gallery: [
+      '/images/044.png',
+      '/images/045.png',
+      '/images/046.png',
+      '/images/047.png'
+    ],
+    copyText: "https://github.com/zyd1800/ZYDproject"
   }
 ];
 
@@ -683,7 +700,7 @@ const MarqueeTicker = () => {
 
 const StatsCounter = () => {
   const stats = [
-    { value: 7, suffix: "+", label: "Projects Shipped", icon: <Code2 className="w-8 h-8" />, color: "bg-[#8FFF00]" },
+    { value: 8, suffix: "+", label: "Projects Shipped", icon: <Code2 className="w-8 h-8" />, color: "bg-[#8FFF00]" },
     { value: 3, suffix: ".5w", label: "Revenue Generated", icon: <Zap className="w-8 h-8" />, color: "bg-[#00F0FF]" },
     { value: 670, suffix: "+", label: "Orders Fulfilled", icon: <Globe className="w-8 h-8" />, color: "bg-[#FF3D00]" },
     { value: 12, suffix: "", label: "Zodiac Signs", icon: <Star className="w-8 h-8" />, color: "bg-[#EFFF00]" },
